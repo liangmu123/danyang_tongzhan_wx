@@ -1,9 +1,10 @@
 import Vue from 'vue'
 import VueRouter from 'vue-router'
-
+import store from '../store/index'
 Vue.use(VueRouter)
 
 const routes = [
+  // 模块1
   {
     path: "/",
     name: "Home",
@@ -15,13 +16,47 @@ const routes = [
       icon: '',
       iconActive: '',
     },
-    children: [
-      {
-        path: "/home",
-        name: "home",
-        component: () => import("@/views/Home.vue"),
-      },
-    ],
+    children: [{
+      path: "/home",
+      name: "home",
+      component: () => import("@/views/Home.vue"),
+    }, ],
+  },
+  // 模块2
+  {
+    path: "/wenjuanList",
+    name: "wenjuanList",
+    component: () => import("@/views/layout.vue"),
+    hidden: true,
+    redirect: "/wenjuanList",
+    meta: {
+      title: "问卷调查",
+      icon: '',
+      iconActive: '',
+    },
+    children: [{
+      path: "/wenjuanList",
+      name: "wenjuanList",
+      component: () => import("@/views/wenjuan/wenjuanList.vue"),
+    }, ],
+  },
+  // 模块3
+  {
+    path: "/",
+    name: "center",
+    component: () => import("@/views/layout.vue"),
+    hidden: true,
+    redirect: "/center",
+    meta: {
+      title: "个人中心",
+      icon: '',
+      iconActive: '',
+    },
+    children: [{
+      path: "/center",
+      name: "center",
+      component: () => import("@/views/center/center.vue"),
+    }, ],
   },
   {
     path: '/about',
@@ -30,7 +65,6 @@ const routes = [
       import('@/views/About.vue'),
     meta: {
       title: '关于',
-      auth: false,
       keepAlive: true
     }
   },
@@ -38,7 +72,6 @@ const routes = [
     path: '*', // 未匹配到路由时重定向
     redirect: '/',
     meta: {
-      // auth: true,
       // keepAlive: true
     }
   }
@@ -50,23 +83,21 @@ const router = new VueRouter({
 
 // 全局路由钩子函数 对全局有效
 router.beforeEach((to, from, next) => {
-  let auth = to.meta.auth
   // 路由发生变化修改页面title
   if (to.meta.title) {
     document.title = to.meta.title
   }
-
-  if (auth) { // 需要登录
-    // if (token) {
-    //   next()
-    // } else {
-    //   next({
-    //     path: '/about',
-    //     query: {
-    //       redirect: to.fullPath
-    //     }
-    //   })
-    // }
+  // 获取token
+  /****注释掉就可以跳过只能在微信打开****/
+  if (!store.state.user.token) {
+    store.dispatch('getToken', {
+        access_token: to.query.access_token,
+        route: to
+      })
+      .then(function () {
+        // getuserinfo()
+        next()
+      })
   } else {
     next()
   }

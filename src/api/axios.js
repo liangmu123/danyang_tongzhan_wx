@@ -9,7 +9,7 @@ import store from '../store'
 let config = {
     timeout: 20000, //超时
     // 代理
-    //   baseURL: process.env.VUE_APP_INTERFACE_PATH
+      baseURL: process.env.VUE_APP_INTERFACE_PATH
 }
 
 // 创建axios实例
