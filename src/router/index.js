@@ -11,15 +11,14 @@ const routes = [
     component: () => import("@/views/layout.vue"),
     hidden: true,
     redirect: "/Home",
-    meta: {
-      title: "首页",
-      icon: '',
-      iconActive: '',
-    },
     children: [{
+      
       path: "/home",
       name: "home",
       component: () => import("@/views/Home.vue"),
+      meta: {
+        title: "丹阳智慧统战平台",
+      },
     }, ],
   },
   // 模块2
@@ -29,15 +28,13 @@ const routes = [
     component: () => import("@/views/layout.vue"),
     hidden: true,
     redirect: "/wenjuanList",
-    meta: {
-      title: "问卷调查",
-      icon: '',
-      iconActive: '',
-    },
     children: [{
       path: "/wenjuanList",
       name: "wenjuanList",
       component: () => import("@/views/wenjuan/wenjuanList.vue"),
+      meta: {
+        title: "问卷调查",
+      },
     }, ],
   },
   // 模块3
@@ -47,15 +44,13 @@ const routes = [
     component: () => import("@/views/layout.vue"),
     hidden: true,
     redirect: "/center",
-    meta: {
-      title: "个人中心",
-      icon: '',
-      iconActive: '',
-    },
     children: [{
       path: "/center",
       name: "center",
       component: () => import("@/views/center/center.vue"),
+      meta: {
+        title: "个人中心",
+      },
     }, ],
   },
   {
