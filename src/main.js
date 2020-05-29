@@ -7,6 +7,8 @@ Vue.config.productionTip = false
 
 /***** npm i vant -S   ******/
 import Vant from 'vant';
+import { Lazyload } from 'vant';
+Vue.use(Lazyload);
 import 'vant/lib/index.css';
 Vue.use(Vant);
 

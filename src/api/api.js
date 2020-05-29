@@ -1,5 +1,15 @@
 import axios from "./axios"
 
+
+//获取资讯列表
+export function articleList(params) {
+  return axios({
+    url: "article/articleList",
+    method: "get",
+    params
+  });
+}
+
 //获取测试数据
 export function activityList(params) {
     return axios({

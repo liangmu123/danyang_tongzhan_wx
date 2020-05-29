@@ -1,0 +1,94 @@
+<!--  -->
+<template>
+  <div class="yhy_word">
+    <!-- <router-link :to="route + '?id=' + details.id"> -->
+    <router-link :to="{path:'/articleDetails',query:{id:details.id}}">
+      <p>{{details.title}}</p>
+      <div>
+        <span>{{details.add_time}}</span>
+
+        <span>2222</span>
+        <span>
+          <img src="../../assets/images/eye.png" alt />
+        </span>
+      </div>
+    </router-link>
+  </div>
+</template>
+
+<script>
+export default {
+  name: "wordComponent",
+  props: {
+    details: {
+      type: Object
+    }
+  },
+  components: {},
+  data() {
+    return {
+      route: ""
+    };
+  },
+  //监听属性 类似于data概念
+  computed: {},
+  //监控data中的数据变化
+  watch: {},
+  methods: {},
+  //生命周期 - 创建完成（可以访问当前this实例）
+  created() {
+    if (this.$route.matched[0].path) {
+      this.route = this.$route.matched[0].path + "/articleDetails";
+    } else {
+      this.route = "/articleDetails";
+    }
+  },
+  //生命周期 - 挂载完成（可以访问DOM元素）
+  mounted() {},
+  beforeCreate() {}, //生命周期 - 创建之前
+  beforeMount() {}, //生命周期 - 挂载之前
+  beforeUpdate() {}, //生命周期 - 更新之前
+  updated() {}, //生命周期 - 更新之后
+  beforeDestroy() {}, //生命周期 - 销毁之前
+  destroyed() {}, //生命周期 - 销毁完成
+  activated() {} //如果页面有keep-alive缓存功能，这个函数会触发
+};
+</script>
+<style lang='less' scoped>
+.yhy_word {
+  padding: 20px 20px;
+  background: white;
+  margin: 24px 0;
+  p:first-child {
+    font-size: 28px;
+    line-height: 40px;
+    color: #333333;
+    margin-bottom: 20px;
+    //   padding: 0 20px;
+  }
+
+  span:first-child {
+    font-size: 24px;
+    line-height: 33px;
+    color: #8b8b8b;
+  }
+  span:nth-child(2) {
+    float: right;
+    font-size: 24px;
+    line-height: 33px;
+    color: #8b8b8b;
+    margin: 0 10px;
+  }
+  span:nth-child(3) {
+    float: right;
+    font-size: 24px;
+    line-height: 33px;
+    > img {
+      width: 25px;
+      height: 17px;
+    }
+  }
+}
+</style>
+<style>
+</style>
