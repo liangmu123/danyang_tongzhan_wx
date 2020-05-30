@@ -7,7 +7,7 @@
     <router-view v-if="!$route.meta.keepAlive"></router-view>
     <navigation></navigation>
     <!-- 加载动画 -->
-     <van-loading v-show="loading" type="spinner" color="#1989fa" />
+     <van-loading v-show="loading" type="spinner" color="#1989fa" vertical />
     
   </div>
 </template>

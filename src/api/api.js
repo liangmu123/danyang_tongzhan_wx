@@ -9,6 +9,14 @@ export function articleList(params) {
     params
   });
 }
+//获取子栏目  ?id=
+export function childCategory(params) {
+  return axios({
+    url: "category/childCategory",
+    method: "get",
+    params
+  });
+}
 
 //获取测试数据
 export function activityList(params) {

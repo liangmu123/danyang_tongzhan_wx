@@ -19,7 +19,6 @@
       </van-grid>
     </div>
     <!--  -->
-    <!-- <InformationList></InformationList> -->
     <div class="news_border">
       <load-list :page="page" :totalpage="totalpage" @loadlist="getnewsListdata">
         <infoList v-for="(item,index) in list" :key="index" :details="item"></infoList>
@@ -34,10 +33,9 @@
 <script>
 import { articleList } from "@/api/api";
 import LoadList from "@/components/LoadList";
-import InformationList from "@/components/InformationList";
 import infoList from "@/components/infoList";
 export default {
-  components: { InformationList, LoadList,infoList },
+  components: {  LoadList,infoList },
   data() {
     return {
       page: 1,
@@ -47,62 +45,62 @@ export default {
       banner: [require("../assets/images/home/banner1.png")],
       navList: [
         {
-          id: "1",
-          url: "center",
+          id: "115",
+          url: "InformationList",
           title: "时政要闻",
           img: require("../assets/images/home/nav1.png")
         },
         {
-          id: "2",
-          url: "wenjuanList",
+          id: "132",
+          url: "InformationList",
           title: "政策法规",
           img: require("../assets/images/home/nav2.png")
         },
         {
-          id: "3",
-          url: "",
+          id: "135",
+          url: "InformationList",
           title: "多党合作",
           img: require("../assets/images/home/nav3.png")
         },
         {
-          id: "4",
-          url: "",
+          id: "136",
+          url: "InformationList",
           title: "党外知识分子",
           img: require("../assets/images/home/nav4.png")
         },
         {
-          id: "5",
-          url: "",
+          id: "140",
+          url: "InformationList",
           title: "机关党建",
           img: require("../assets/images/home/nav5.png")
         },
         {
-          id: "6",
-          url: "",
+          id: "122",
+          url: "tabinformationList",
           title: "民族宗教",
           img: require("../assets/images/home/nav6.png")
         },
         {
-          id: "7",
-          url: "",
+          id: "127",
+          url: "InformationList",
           title: "民营经济",
           img: require("../assets/images/home/nav7.png")
         },
         {
-          id: "8",
-          url: "",
+          id: "138",
+          url: "InformationList",
           title: "新的社会阶层",
           img: require("../assets/images/home/nav8.png")
         },
         {
-          id: "9",
-          url: "",
+          id: "139",
+          url: "InformationList",
           title: "港澳台侨",
           img: require("../assets/images/home/nav9.png")
         },
         {
-          id: "10",
-          url: "",
+          id: "55",
+          url: "tabinformationList",
           title: "关于我们",
           img: require("../assets/images/home/nav10.png")
         }
@@ -117,7 +115,7 @@ export default {
     // 跳转到资讯详情
     gozixun(item) {
       console.log(item, "----------");
-      this.$router.push({ name: item.url, query: { id: item.id } });
+      this.$router.push({ name: item.url, query: { id: item.id,title:item.title } });
     },
     // 获取资讯
     getnewsListdata() {

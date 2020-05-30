@@ -66,7 +66,7 @@ export default {
 .yhy_word {
   background: white;
   margin: 24px 0;
-  padding: 28px 20px;
+  padding: 28px 33px;
 
   .border {
     display: flex;

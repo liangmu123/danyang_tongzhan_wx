@@ -12,14 +12,35 @@ const routes = [
     hidden: true,
     redirect: "/Home",
     children: [{
-      
-      path: "/home",
-      name: "home",
-      component: () => import("@/views/Home.vue"),
-      meta: {
-        title: "丹阳智慧统战平台",
+
+        path: "/home",
+        name: "home",
+        component: () => import("@/views/Home.vue"),
+        meta: {
+          title: "丹阳智慧统战平台",
+        },
       },
-    }, ],
+      {
+
+        path: "/InformationList",
+        name: "InformationList",
+        component: () => import("@/views/InformationList.vue"),
+        meta: {
+          title: "丹阳智慧统战平台",
+          // keepAlive: true,
+        },
+      },
+      {
+
+        path: "/tabinformationList",
+        name: "tabinformationList",
+        component: () => import("@/views/tabinformationList.vue"),
+        meta: {
+          title: "丹阳智慧统战平台",
+          // keepAlive: true,
+        },
+      },
+    ],
   },
   // 模块2
   {
@@ -80,6 +101,7 @@ const router = new VueRouter({
 router.beforeEach((to, from, next) => {
   // 路由发生变化修改页面title
   if (to.meta.title) {
+    
     document.title = to.meta.title
   }
   // 获取token
@@ -98,5 +120,7 @@ router.beforeEach((to, from, next) => {
   }
 })
 
-router.afterEach((to) => {});
+router.afterEach((to) => {
+  // console.log(window.location.port) 
+});
 export default router
