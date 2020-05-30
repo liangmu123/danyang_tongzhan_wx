@@ -18,14 +18,14 @@
         </van-grid-item>
       </van-grid>
     </div>
-    <!--  -->
+    <!-- 通知公告 -->
+    <div class="label_border">
+      <span>通知公告</span>
+      <img src="../assets/images/icon-left.png" alt="" @click="goNotice()">
+    </div>
     <div class="news_border">
-      <load-list :page="page" :totalpage="totalpage" @loadlist="getnewsListdata">
-        <infoList v-for="(item,index) in list" :key="index" :details="item"></infoList>
-        <!-- <div v-for="(item,index) in list" :key="index">
-          <p>111</p>
-        </div> -->
-      </load-list>
+        <infoList v-for="(item,index) in list" :key="index" :details="item"></infoList>   
+     
     </div>
   </div>
 </template>
@@ -112,24 +112,25 @@ export default {
   //监控data中的数据变化
   watch: {},
   methods: {
+    goNotice(){
+      this.$router.push({ name: 'InformationList', query: { id: 128,title:'通知公告' } });
+    },
     // 跳转到资讯详情
     gozixun(item) {
-      console.log(item, "----------");
+      // console.log(item, "----------");
       this.$router.push({ name: item.url, query: { id: item.id,title:item.title } });
     },
     // 获取资讯
     getnewsListdata() {
       let params = {
-        cid: 123,
+        cid: 128,
         // type: this.id,
         page: this.page,
-        pagesize: this.pagesize
+        pagesize: 10
       };
       articleList(params).then(res => {
         console.log(res.data, "-----获取资讯------");
-        this.list = [...this.list, ...res.data.items];
-        this.totalpage = res.data.totalpage;
-        this.page++;
+        this.list = res.data.items;
       });
     }
   },
@@ -196,6 +197,26 @@ export default {
   }
   .news_border {
     margin-bottom: 100px;
+  }
+  .label_border{
+    width: 100%;
+    height: 40px;
+    display: flex;
+    justify-content: space-between;
+    align-content: center;
+    align-items: center;
+    >span{
+      font-size: 32px;
+      color: #3A3A3A;
+      border-left: 6px solid #C42426;
+      padding-left: 8px;
+      
+    }
+    >img{
+      width: 14px;
+      height: 22px;
+      margin-right: 20px;
+    }
   }
 }
 </style>
