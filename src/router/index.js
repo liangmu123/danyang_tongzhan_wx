@@ -58,7 +58,7 @@ const routes = [
           // keepAlive: true,
         },
       },
-      
+
     ],
   },
   // 模块2
@@ -69,13 +69,23 @@ const routes = [
     hidden: true,
     redirect: "/wenjuanList",
     children: [{
-      path: "/wenjuanList",
-      name: "wenjuanList",
-      component: () => import("@/views/wenjuan/wenjuanList.vue"),
-      meta: {
-        title: "问卷调查",
+        path: "/wenjuanList",
+        name: "wenjuanList",
+        component: () => import("@/views/wenjuan/wenjuanList.vue"),
+        meta: {
+          title: "问卷调查",
+        },
       },
-    }, ],
+      {
+        path: "/questionDetail",
+        name: "questionDetail",
+        component: () => import("@/views/wenjuan/questionDetail.vue"),
+        meta: {
+          title: "问卷调查",
+        },
+      },
+
+    ],
   },
   // 模块3
   {
@@ -85,13 +95,31 @@ const routes = [
     hidden: true,
     redirect: "/center",
     children: [{
-      path: "/center",
-      name: "center",
-      component: () => import("@/views/center/center.vue"),
-      meta: {
-        title: "个人中心",
+        path: "/center",
+        name: "center",
+        component: () => import("@/views/center/center.vue"),
+        meta: {
+          title: "个人中心",
+        },
       },
-    }, ],
+      {
+        path: "/myinfo",
+        name: "myinfo",
+        component: () => import("@/views/center/myinfo.vue"),
+        meta: {
+          title: "个人资料",
+        },
+      },
+    ],
+  },
+
+  {
+    path: "/bindInfo",
+    name: "bindInfo",
+    component: () => import("@/views/bindInfo.vue"),
+    meta: {
+      title: "实名认证",
+    },
   },
   {
     path: '/about',
@@ -120,7 +148,7 @@ const router = new VueRouter({
 router.beforeEach((to, from, next) => {
   // 路由发生变化修改页面title
   if (to.meta.title) {
-    
+
     document.title = to.meta.title
   }
   // 获取token

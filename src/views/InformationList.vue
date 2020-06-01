@@ -9,6 +9,9 @@
         </div>-->
       </load-list>
     </div>
+    <div v-show="content">
+      暂无详情
+    </div>
   </div>
 </template>
 
@@ -24,15 +27,14 @@ export default {
       page: 1,
       pagesize: 10,
       totalpage: 1,
-      list: []
+      list: [],
+      content:false
     };
   },
   //监听属性 类似于data概念
   computed: {},
   //监控data中的数据变化
-  activated() {
-    
-  } ,//如果页面有keep-alive缓存功能，这个函数会触发
+  activated() {}, //如果页面有keep-alive缓存功能，这个函数会触发
   watch: {},
   methods: {
     // 获取资讯
@@ -45,9 +47,16 @@ export default {
       };
       articleList(params).then(res => {
         console.log(res.data, "-----获取资讯------");
-        this.list = [...this.list, ...res.data.items];
-        this.totalpage = res.data.totalpage;
-        this.page++;
+
+        if (res.data.items == "") {
+          console.log("asdada");
+          this.content = true;
+        } else {
+           this.content = false;
+          this.list = [...this.list, ...res.data.items];
+          this.totalpage = res.data.totalpage;
+          this.page++;
+        }
       });
     }
   },
@@ -63,8 +72,7 @@ export default {
   beforeUpdate() {}, //生命周期 - 更新之前
   updated() {}, //生命周期 - 更新之后
   beforeDestroy() {}, //生命周期 - 销毁之前
-  destroyed() {}, //生命周期 - 销毁完成
-  
+  destroyed() {} //生命周期 - 销毁完成
 };
 </script>
 <style lang='less' scoped>

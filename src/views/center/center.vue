@@ -4,9 +4,9 @@
     <!-- 头部 -->
     <div class="top_border">
       <div class="touxiang_border">
-        <img src="../../assets/logo.png" alt />
+        <img :src=" details.avatar" alt />
       </div>
-      <div class="peopleName">王江国</div>
+      <div class="peopleName">{{details.nickname}}</div>
     </div>
     <!-- 积分时长 -->
     <div class="learn_border">
@@ -20,7 +20,7 @@
       </div>
     </div>
     <!--  -->
-    <div class="line" v-for="(item,index) in allList" :key="index">
+    <div class="line" v-for="(item,index) in navlist" :key="index">
       <router-link :to="item.link">
         <img class="ziliao" :src="item.src" alt />
         <div class>{{item.title}}</div>
@@ -31,21 +31,26 @@
 </template>
 
 <script>
+import { getUserInfo } from "@/api/api";
 export default {
   components: {},
   data() {
     return {
+      navlist:[],
+      details:[],
+       IMG_PATH: process.env.VUE_APP_IMG_PATH,
       allList: [
-        {
-          title: "个人资料",
-          src: require("../../assets/images/ziliao.png"),
-          link: "/bindInfo"
-        },
         {
           title: "成为统战人士",
           src: require("../../assets/images/people.png"),
           link: "/bindInfo"
         },
+        {
+          title: "个人资料",
+          src: require("../../assets/images/ziliao.png"),
+          link: "/myinfo"
+        },
+        
       ]
     };
   },
@@ -53,9 +58,27 @@ export default {
   computed: {},
   //监控data中的数据变化
   watch: {},
-  methods: {},
+  methods: {
+    // 获取个人信息
+    getUserInfodata(){
+      
+       getUserInfo().then(res => {
+        console.log(res.data, "-----获取个人信息------");
+        this.details=res.data;
+
+         if(this.details.is_bind_mobile == 0){
+           this.navlist = this.allList
+            
+          }else{
+            this.navlist = this.allList.slice(1,)
+          }
+      });
+    }
+  },
   //生命周期 - 创建完成（可以访问当前this实例）
-  created() {},
+  created() {
+    this.getUserInfodata()
+  },
   //生命周期 - 挂载完成（可以访问DOM元素）
   mounted() {},
   beforeCreate() {}, //生命周期 - 创建之前
@@ -152,10 +175,11 @@ export default {
 //
 .line {
   width: 92%;
-  margin: 0 auto;
+  margin: 10px auto;
   height: 100px;
   background: white;
   line-height: 100px;
+  
   //    align-items: center;
   .ziliao {
     width: 34px;

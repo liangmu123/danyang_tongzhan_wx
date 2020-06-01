@@ -21,7 +21,7 @@ module.exports = {
             // target:
             //   "http://micro.cst-info.cn/api/", // 目标代理接口地址
             target:
-              "http://dytz.cst-info.cn:8084/api/v2/", // 目标代理接口地址
+              "http://dytz.cst-info.cn:8084/api/", // 目标代理接口地址
             secure: false,
             changeOrigin: true, // 开启代理，在本地创建一个虚拟服务端
             // ws: true, // 是否启用websockets
