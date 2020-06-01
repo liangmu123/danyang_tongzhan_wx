@@ -1,6 +1,7 @@
-<!-- 文章详情 -->
+<!-- 视频详情 -->
 <template>
   <div class="articleDetails">
+      <ckplayer :video_url="details.video_path"></ckplayer>
     <div class="title_border">
       <div class="title_info">{{details.title}}</div>
     </div>
@@ -11,10 +12,6 @@
         <span>{{details.click_count}}</span>
       </van-col>
     </van-row>
-    <!-- 图片 -->
-    <div class="img_border" @click="clicks()">
-      <img :src="IMG_PATH + details.img" alt />
-    </div>
     <!-- 内容 -->
     <div class="content" v-html="details.content">
 
@@ -24,13 +21,11 @@
 
 <script>
 import { articleDetail } from "@/api/api";
-import { ImagePreview } from "vant";
-
+import ckplayer from '@/components/ckplayer'
 export default {
-  components: {},
+  components: {ckplayer},
   data() {
     return {
-      show: false,
       id: this.$route.query.id,
       details: [],
       IMG_PATH: process.env.VUE_APP_IMG_PATH
@@ -41,14 +36,6 @@ export default {
   //监控data中的数据变化
   watch: {},
   methods: {
-    clicks() {
-      ImagePreview({
-        images: [
-           this.IMG_PATH +  this.details.img
-        ],
-        closeable: true
-      });
-    },
     //   获取详情
     articleDetaildata() {
       //   articleDetail

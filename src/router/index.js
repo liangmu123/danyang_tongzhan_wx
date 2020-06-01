@@ -40,6 +40,25 @@ const routes = [
           // keepAlive: true,
         },
       },
+      {
+        path: "/articleDetails",
+        name: "articleDetails",
+        component: () => import("@/views/articleDetails.vue"),
+        meta: {
+          title: "资讯详情",
+          // keepAlive: true,
+        },
+      },
+      {
+        path: "/videoDetails",
+        name: "videoDetails",
+        component: () => import("@/views/videoDetails.vue"),
+        meta: {
+          title: "资讯详情",
+          // keepAlive: true,
+        },
+      },
+      
     ],
   },
   // 模块2

@@ -18,6 +18,16 @@ export function childCategory(params) {
   });
 }
 
+
+// article
+export function articleDetail(params) {
+  return axios({
+    url: "article",
+    method: "get",
+    params
+  });
+}
+
 //获取测试数据
 export function activityList(params) {
     return axios({
