@@ -1,6 +1,6 @@
 <!-- 视频组件 -->
 <template>
-    <div id="yhy_ckplayer"></div>
+    <div id="yckplayer"></div>
 </template>
 <script>
     export default {
@@ -35,7 +35,7 @@
         watch:{
             video_url(val){
                 var videoObject = {
-                    container: "#yhy_ckplayer", //“#”代表容器的ID，“.”或“”代表容器的class
+                    container: "#yckplayer", //“#”代表容器的ID，“.”或“”代表容器的class
                     variable: "player", //该属性必需设置，值等于下面的new chplayer()的对象
                     // poster: require('../../assets/test.jpg'), //封面图片
                     autoplay:this.autoplay,
@@ -50,7 +50,7 @@
         },
         mounted(){
             var videoObject = {
-                container: "#yhy_ckplayer", //“#”代表容器的ID，“.”或“”代表容器的class
+                container: "#yckplayer", //“#”代表容器的ID，“.”或“”代表容器的class
                 variable: "player", //该属性必需设置，值等于下面的new chplayer()的对象
                 // poster: require('../../assets/test.jpg'), //封面图片
                 autoplay:this.autoplay,
@@ -131,7 +131,7 @@
     }
 </script>
 <style scoped>
-    #yhy_ckplayer{
+    #yckplayer{
         width:100%;
         height:389px;
         margin-bottom: 20px;

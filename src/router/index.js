@@ -1,6 +1,8 @@
 import Vue from 'vue'
 import VueRouter from 'vue-router'
 import store from '../store/index'
+// 浏览统计
+import postView from '@api/postView'
 Vue.use(VueRouter)
 
 const routes = [
@@ -168,6 +170,8 @@ router.beforeEach((to, from, next) => {
 })
 
 router.afterEach((to) => {
+  // 浏览统计
+  postView(to);
   // console.log(window.location.port) 
 });
 export default router

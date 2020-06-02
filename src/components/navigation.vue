@@ -1,7 +1,7 @@
 <!--  -->
 <template>
   <div class>
-    <van-tabbar v-model="active" active-color="#FF2222" inactive-color="#000"  route>
+    <van-tabbar v-model="active" active-color="#FF2222" inactive-color="#000" >
       <van-tabbar-item to="/Home">
         <span>{{icon.name}}</span>
         <template #icon="props">

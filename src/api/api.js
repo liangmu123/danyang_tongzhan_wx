@@ -113,6 +113,29 @@ export function becomeTzObject(params) {
   });
 }
 
+//首页轮播 api/v2/ad/index?position=10001
+export function get_banner() {
+  return axios({
+    url: "v2/ad/index?position=10001",
+    method: "get",
+  });
+}
+//统计 get_postview
+export function get_postview(params) {
+  return axios({
+    url: "v2/commons/postView",
+    method: "get",
+    params
+  });
+}
+
+
+
+
+
+
+
+
 
 
 

@@ -4,8 +4,9 @@
     <!-- banner -->
     <div class="banner_border">
       <van-swipe :autoplay="5000">
-        <van-swipe-item v-for="(image, index) in banner" :key="index">
-          <img :src="image" />
+        <van-swipe-item v-for="(item, index) in bannerlist" :key="index">
+          <!-- <img v-lazy="IMG_PATH + item.image" /> -->
+          <img :src="IMG_PATH + item.image" />
         </van-swipe-item>
       </van-swipe>
     </div>
@@ -31,7 +32,7 @@
 </template>
 
 <script>
-import { articleList } from "@/api/api";
+import { articleList,get_banner } from "@/api/api";
 import LoadList from "@/components/LoadList";
 import infoList from "@/components/infoList";
 export default {
@@ -42,6 +43,8 @@ export default {
       pagesize: 10,
       totalpage: 1,
       list: [],
+       IMG_PATH: process.env.VUE_APP_IMG_PATH,
+      bannerlist:[],
       banner: [require("../assets/images/home/banner1.png")],
       navList: [
         {
@@ -132,6 +135,13 @@ export default {
         console.log(res.data, "-----获取资讯------");
         this.list = res.data.items;
       });
+    },
+    // 获取轮播
+    get_bannerdata(){
+      get_banner().then(res=>{
+        console.log(res.data, "-----获取轮播------");
+        this.bannerlist=res.data;
+      })
     }
   },
   //生命周期 - 创建完成（可以访问当前this实例）
@@ -139,6 +149,7 @@ export default {
   //生命周期 - 挂载完成（可以访问DOM元素）
   mounted() {
     this.getnewsListdata();
+    this.get_bannerdata();
   },
   beforeCreate() {}, //生命周期 - 创建之前
   beforeMount() {}, //生命周期 - 挂载之前
