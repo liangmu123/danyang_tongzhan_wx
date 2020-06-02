@@ -2,8 +2,8 @@
 <template>
   <div class="questionList">
     <router-link :to="{path:'/questionDetail',query:{id:details.id}}">
-      <div>{{details.question}}</div>
-      <div>{{details.updatetime}}</div>
+      <div>{{details.name}}</div>
+      <!-- <div>{{details.updatetime}}</div> -->
     </router-link>
   </div>
 </template>
@@ -43,10 +43,12 @@ export default {
 .questionList {
   width: 92%;
   background: white;
-  margin: 20px auto;
+  margin: 24px auto;
 
   box-sizing: border-box;
   padding: 28px 24px;
+  box-shadow:0px 7px 10px rgba(129,129,129,0.3);
+  border-radius:20px 20px 20px 20px;
   > a {
     > div:nth-child(1) {
       font-size: 30px;

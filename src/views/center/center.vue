@@ -20,25 +20,39 @@
       </div>
     </div>
     <!--  -->
-    <div class="line" v-for="(item,index) in navlist" :key="index">
+    <!-- <div class="line" v-for="(item,index) in navlist" :key="index">
       <router-link :to="item.link">
         <img class="ziliao" :src="item.src" alt />
         <div class>{{item.title}}</div>
         <img class="icon_left" src="../../assets/images/icon-left.png" alt />
       </router-link>
+    </div>-->
+    <div class="line" @click="gobind()" v-show="showbind">
+      <img class="ziliao" src="../../assets/images/people.png" alt />
+      <div class>{{text}}</div>
+      <img class="icon_left" src="../../assets/images/icon-left.png" alt />
+    </div>
+    <div class="line" @click="gomyinfo">
+      <img class="ziliao" src="../../assets/images/ziliao.png" alt />
+      <div class>个人资料</div>
+      <img class="icon_left" src="../../assets/images/icon-left.png" alt />
     </div>
   </div>
 </template>
 
 <script>
 import { getUserInfo } from "@/api/api";
+// is_bind_mobile==1 && is_object==0  审核中
+// is_object==2  未通过
 export default {
   components: {},
   data() {
     return {
-      navlist:[],
-      details:[],
-       IMG_PATH: process.env.VUE_APP_IMG_PATH,
+      showbind:true,
+      text: "",
+      navlist: [],
+      details: [],
+      IMG_PATH: process.env.VUE_APP_IMG_PATH,
       allList: [
         {
           title: "成为统战人士",
@@ -49,8 +63,7 @@ export default {
           title: "个人资料",
           src: require("../../assets/images/ziliao.png"),
           link: "/myinfo"
-        },
-        
+        }
       ]
     };
   },
@@ -60,24 +73,39 @@ export default {
   watch: {},
   methods: {
     // 获取个人信息
-    getUserInfodata(){
-      
-       getUserInfo().then(res => {
+    getUserInfodata() {
+      getUserInfo().then(res => {
         console.log(res.data, "-----获取个人信息------");
-        this.details=res.data;
-
-         if(this.details.is_bind_mobile == 0){
-           this.navlist = this.allList
-            
-          }else{
-            this.navlist = this.allList.slice(1,)
-          }
+        this.details = res.data;
+        if (this.details.is_object == 0 && this.details.is_bind_mobile == 1) {
+          this.text = "成为统战人士 （审核中）";
+        } else if (this.details.is_object == 0 && this.details.is_bind_mobile == 0) {
+          this.text = "成为统战人士";
+        } else if (this.details.is_object == 1 && this.details.is_bind_mobile == 1) {
+          this.showbind=false;
+        }
+        if (this.details.is_object == 0) {
+          this.navlist = this.allList;
+        } else {
+          this.navlist = this.allList.slice(1);
+        }
       });
+    },
+    gobind() {
+      if (this.details.is_object == 0 && this.details.is_bind_mobile == 1) {
+           this.$toast.fail({ message: "审核中" });
+        } else if (this.details.is_object == 0 && this.details.is_bind_mobile == 0) {
+          this.$router.push({ name: "bindInfo" });
+        }
+      
+    },
+    gomyinfo() {
+      this.$router.push({ name: "myinfo" });
     }
   },
   //生命周期 - 创建完成（可以访问当前this实例）
   created() {
-    this.getUserInfodata()
+    this.getUserInfodata();
   },
   //生命周期 - 挂载完成（可以访问DOM元素）
   mounted() {},
@@ -179,7 +207,7 @@ export default {
   height: 100px;
   background: white;
   line-height: 100px;
-  
+
   //    align-items: center;
   .ziliao {
     width: 34px;

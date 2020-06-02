@@ -118,7 +118,7 @@ const routes = [
     name: "bindInfo",
     component: () => import("@/views/bindInfo.vue"),
     meta: {
-      title: "实名认证",
+      title: "成为统战人士",
     },
   },
   {

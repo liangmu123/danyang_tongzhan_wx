@@ -9,8 +9,10 @@
         </div>-->
       </load-list>
     </div>
-    <div v-show="content">
-      暂无详情
+    <div v-show="content" class="nonecontent">
+      <div class="no-icon">
+        <img src="../assets/images/none.png" alt />
+      </div>
     </div>
   </div>
 </template>
@@ -28,7 +30,7 @@ export default {
       pagesize: 10,
       totalpage: 1,
       list: [],
-      content:false
+      content: false
     };
   },
   //监听属性 类似于data概念
@@ -52,7 +54,7 @@ export default {
           console.log("asdada");
           this.content = true;
         } else {
-           this.content = false;
+          this.content = false;
           this.list = [...this.list, ...res.data.items];
           this.totalpage = res.data.totalpage;
           this.page++;
@@ -78,6 +80,23 @@ export default {
 <style lang='less' scoped>
 .news_border {
   margin-bottom: 100px;
+}
+.nonecontent{
+  width: 100%;
+  min-height: 100%;
+  position: fixed;
+  .no-icon {
+    width: 278px;
+    height: 343px;
+        margin: 60px auto;
+    // width: 80%;
+    // height: 400px;
+    // margin: 0 auto;
+    > img {
+      width: 100%;
+      height: 100%;
+    }
+  }
 }
 </style>
 <style>

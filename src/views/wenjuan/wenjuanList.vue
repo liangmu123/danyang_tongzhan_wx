@@ -8,7 +8,7 @@
 <script>
 import questionList from "@/components/questionList";
 
-import { get_questionList } from "@/api/api";
+import { get_questionList,questionCategoryList } from "@/api/api";
 export default {
   components: { questionList },
   data() {
@@ -21,12 +21,12 @@ export default {
   //监控data中的数据变化
   watch: {},
   methods: {
-    //   获取问卷列表
-    questionListdata() {
+    //   获取问卷类型列表
+    get_questionCategoryList() {
       let params = {
         pagesize: 100
       };
-      get_questionList(params).then(res => {
+      questionCategoryList(params).then(res => {
         console.log(res.data, "-----获取问卷列表------");
         this.list = res.data.items;
       });
@@ -34,7 +34,7 @@ export default {
   },
   //生命周期 - 创建完成（可以访问当前this实例）
   created() {
-    this.questionListdata();
+    this.get_questionCategoryList();
   },
   //生命周期 - 挂载完成（可以访问DOM元素）
   mounted() {},

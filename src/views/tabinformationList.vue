@@ -1,16 +1,18 @@
 <!-- 资讯列表 -->
 <template>
   <div class="tabinformationList">
-    <van-tabs v-model="active"  title-active-color="#D90606" color="#D90606" @click="onClick">
-      <van-tab v-for="(item,index) in navlist" :title="item.title" :key="index">
-        
-      </van-tab>
+    <van-tabs v-model="active" title-active-color="#D90606" color="#D90606" @click="onClick">
+      <van-tab v-for="(item,index) in navlist" :title="item.title" :key="index"></van-tab>
     </van-tabs>
     <div class="news_border">
       <load-list :page="page" :totalpage="totalpage" @loadlist="getnewsListdata">
         <infoList v-for="(item,index) in list" :key="index" :details="item"></infoList>
-        
       </load-list>
+    </div>
+    <div v-show="content" class="nonecontent">
+      <div class="no-icon">
+        <img src="../assets/images/none.png" alt />
+      </div>
     </div>
   </div>
 </template>
@@ -30,7 +32,8 @@ export default {
       page: 1,
       pagesize: 10,
       totalpage: 1,
-      list: []
+      list: [],
+      content: false
     };
   },
   //监听属性 类似于data概念
@@ -39,7 +42,7 @@ export default {
   activated() {}, //如果页面有keep-alive缓存功能，这个函数会触发
   watch: {},
   methods: {
-    onClick(){
+    onClick() {
       this.page = 1;
       this.list = [];
       this.getnewsListdata();
@@ -67,10 +70,15 @@ export default {
         pagesize: this.pagesize
       };
       articleList(params).then(res => {
-        console.log(res.data, "-----获取资讯------");
-        this.list = [...this.list, ...res.data.items];
-        this.totalpage = res.data.totalpage;
-        this.page++;
+        // console.log(res.data, "-----获取资讯------");
+        if (res.data.items == "") {
+          this.content = true;
+        } else {
+          this.content = false;
+          this.list = [...this.list, ...res.data.items];
+          this.totalpage = res.data.totalpage;
+          this.page++;
+        }
       });
     }
   },
@@ -81,7 +89,6 @@ export default {
   //生命周期 - 挂载完成（可以访问DOM元素）
   mounted() {
     document.title = this.$route.query.title;
-    
   },
   beforeCreate() {}, //生命周期 - 创建之前
   beforeMount() {}, //生命周期 - 挂载之前
@@ -94,6 +101,23 @@ export default {
 <style lang='less' scoped>
 .news_border {
   margin-bottom: 100px;
+}
+.nonecontent {
+  width: 100%;
+  min-height: 100%;
+  position: fixed;
+  .no-icon {
+    width: 278px;
+    height: 343px;
+    margin: 60px auto;
+    // width: 80%;
+    // height: 400px;
+    // margin: 0 auto;
+    > img {
+      width: 100%;
+      height: 100%;
+    }
+  }
 }
 </style>
 <style>
