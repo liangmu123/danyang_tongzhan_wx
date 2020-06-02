@@ -11,11 +11,11 @@
     <!-- 积分时长 -->
     <div class="learn_border">
       <div>
-        <div>30000</div>
+        <div>{{details.score}}</div>
         <div>我的积分</div>
       </div>
       <div>
-        <div>200.5h</div>
+        <div>{{details.duration}}h</div>
         <div>学习时长</div>
       </div>
     </div>
