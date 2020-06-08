@@ -4,9 +4,9 @@
     <!-- banner -->
     <div class="banner_border">
       <van-swipe :autoplay="5000">
-        <van-swipe-item v-for="(item, index) in bannerlist" :key="index">
-          <!-- <img v-lazy="IMG_PATH + item.image" /> -->
-          <img :src="IMG_PATH + item.image" />
+        <van-swipe-item v-for="(item, index) in banner" :key="index">
+          <img :src="item" />
+          <!-- <img :src="IMG_PATH + item.image" /> -->
         </van-swipe-item>
       </van-swipe>
     </div>

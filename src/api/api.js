@@ -50,14 +50,13 @@ export function questionCategoryList() {
 }
 
 
-// 获取问卷  Question/questionList
+// 获取问卷  question/questionList?cid=16
 export function get_questionList(params) {
   return axios({
-    url: "v2/Question/questionList",
+    url: "v2/question/questionList",
     method: "get",
     params:{
-      access_token: window.localStorage.getItem("access_token"),
-      ...params
+      params
     }
   });
 }
@@ -129,9 +128,15 @@ export function get_postview(params) {
   });
 }
 
+// 提交答案接口 /api/v2/question/answer
 
-
-
+export function get_answer(params) {
+  return axios({
+    url: "v2/question/answer",
+    method: "get",
+    params
+  });
+}
 
 
 

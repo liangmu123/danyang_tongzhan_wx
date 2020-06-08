@@ -1,7 +1,7 @@
 <!--  -->
 <template>
   <div class="questionList">
-    <router-link :to="{path:'/questionDetail',query:{id:details.id}}">
+    <router-link :to="{path:'/questionDetail',query:{id:details.id,title:details.name}}">
       <div>{{details.name}}</div>
       <!-- <div>{{details.updatetime}}</div> -->
     </router-link>

@@ -15,7 +15,7 @@
         <div>我的积分</div>
       </div>
       <div>
-        <div>{{details.duration}}h</div>
+        <div>{{duration}}h</div>
         <div>学习时长</div>
       </div>
     </div>
@@ -68,7 +68,12 @@ export default {
     };
   },
   //监听属性 类似于data概念
-  computed: {},
+  computed: {
+    duration:function(){
+      let time= (this.details.duration/3600)
+      return Math.round(time*100)/100
+    }
+  },
   //监控data中的数据变化
   watch: {},
   methods: {
