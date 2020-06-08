@@ -1,8 +1,8 @@
 <!-- 资讯列表 -->
 <template>
   <div class="tabinformationList">
-    <van-tabs v-model="active" title-active-color="#D90606" color="#D90606" @click="onClick">
-      <van-tab v-for="(item,index) in navlist" :title="item.title" :key="index"></van-tab>
+    <van-tabs  v-model="active" :scrollspy="true" :sticky="true" :ellipsis="false" title-active-color="#D90606" color="#D90606" @click="onClick" >
+      <van-tab  v-for="(item,index) in navlist" :title="item.title" :key="index"></van-tab>
     </van-tabs>
     <div class="news_border">
       <load-list :page="page" :totalpage="totalpage" @loadlist="getnewsListdata">

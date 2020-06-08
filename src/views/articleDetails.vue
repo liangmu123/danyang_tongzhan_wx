@@ -119,7 +119,8 @@ export default {
     }
   }
   .content{
-      font-size: 28px;
+      font-size: 32px;
+      line-height: 50px;
   }
 }
 </style>

@@ -3,6 +3,8 @@ import VueRouter from 'vue-router'
 import store from '../store/index'
 // 浏览统计
 import postView from '@api/postView'
+/***** 微信分享方法 ******/
+import WX_SHARE from '@api/share'
 Vue.use(VueRouter)
 
 const routes = [
@@ -172,6 +174,8 @@ router.beforeEach((to, from, next) => {
 router.afterEach((to) => {
   // 浏览统计
   postView(to);
+   // 微信分享
+   WX_SHARE(to)
   // console.log(window.location.port) 
 });
 export default router

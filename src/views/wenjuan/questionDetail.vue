@@ -20,7 +20,7 @@
       </div>
     </div>
     <div class="tijiao_border">
-      <van-button class="tijiao" type="info" @click="tijiao()">提交</van-button>
+      <van-button round size="small" class="tijiao" type="info" @click="tijiao()">提交</van-button>
     </div>
   </div>
 </template>
@@ -146,7 +146,7 @@ export default {
   }
   .tijiao_border {
     width: 25%;
-    margin: 0 auto;
+    margin: 0  auto 60px;
   }
   .activeclass{
     background: #C1FFD1;
